@@ -19,10 +19,7 @@ defmodule Nexus.MixProject do
         extras: ["README.md"]
       ],
       description: description(),
-      files: ~w(lib priv .formatter.exs mix.exs README* readme* LICENSE*
-      license* CHANGELOG* changelog* src),
-      licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/bdanklin/Nexus"}
+      package: package()
     ]
   end
 
@@ -45,5 +42,15 @@ defmodule Nexus.MixProject do
 
   defp description() do
     "A lightweight wrapper for the Nexus Hub API written in Elixir."
+  end
+
+  defp package() do
+    [
+      # These are the default files included in the package
+      files: ~w(lib priv .formatter.exs mix.exs README* readme* LICENSE*
+                license* CHANGELOG* changelog* src),
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/bdanklin/Nexus"}
+    ]
   end
 end
