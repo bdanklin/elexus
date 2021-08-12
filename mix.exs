@@ -7,7 +7,17 @@ defmodule Nexus.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      # Docs
+      name: "Nexus",
+      source_url: "https://github.com/bdanklin/Nexus",
+      homepage_url: "https://github.com/bdanklin/Nexus",
+      docs: [
+        # The main page in the docs
+        main: "Nexus",
+        logo: "/home/benjamin/nexus/logo.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -21,8 +31,10 @@ defmodule Nexus.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+      {:httpoison, "~> 1.7"},
+      {:jason, "~> 1.0"},
+      {:morphix, "~> 0.8.0"}
     ]
   end
 end
