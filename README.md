@@ -1,8 +1,8 @@
-# ElexusHub
+# Elexus Hub
 
-A Lightweight wrapper for the ElexusHub Hub Api
+A Lightweight wrapper for the Nexus Hub API, written in Elixir.
 
-todo: add link
+> > > > > > > d046bb61a3e3d5fff104ea57bd966df3d812f353
 
 ## Installation
 
