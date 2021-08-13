@@ -1,4 +1,4 @@
-defmodule Fish.Elexus.Base do
+defmodule Elexus.Base do
   use HTTPoison.Base
   @moduledoc false
 

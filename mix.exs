@@ -9,12 +9,12 @@ defmodule Elexus.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       # Docs
-      name: "Elexus Hub",
+      name: "Elexus",
       source_url: "https://github.com/bdanklin/elexus",
       homepage_url: "https://github.com/bdanklin/elexus",
       docs: [
         # The main page in the docs
-        main: "Elexus Hub",
+        main: "Elexus",
         logo: "./logo.png",
         extras: ["README.md"]
       ],
