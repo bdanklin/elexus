@@ -1,6 +1,6 @@
 defmodule ElexusHub do
   @moduledoc """
-  An unofficial wrapper for the Wacraft portion of the [ElexusHubHub API](https://elexushubhub.co/wow-classic)
+  An unofficial wrapper for the Wacraft portion of the [Nexus Hub API](https://elexushubhub.co/wow-classic)
   """
   @doc """
   Returns the current phase details.
@@ -94,7 +94,7 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns a map of profession in a list.
+  Returns a list containing all professions.
 
   ##Examples
 
@@ -130,6 +130,8 @@ defmodule ElexusHub do
 
   @doc """
 
+  Returns `limit` amount of craftables currently identified as being profitable to craft.
+
   ## Examples
 
       iex> ElexusHub.item_craft_deals("netherwind", "alliance", 1)
@@ -164,7 +166,7 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns information about the materials required to make the selected item and what that item can be made into.
+  Returns information about the materials required to make the selected `item_id` and what that `item_id` can be made into, pricing is drawn from the given `realm` and `faction`.
 
   ## Examples
 
@@ -217,8 +219,8 @@ defmodule ElexusHub do
       }
   """
 
-  @spec item_crafts(String.t(), String.t(), String.t()) :: map()
-  def item_crafts(server, faction \\ "alliance", item_id) do
+  @spec craftable(String.t(), String.t(), String.t()) :: map()
+  def craftable(server, faction \\ "alliance", item_id) do
     ~s(crafting/#{server}-#{faction}/#{item_id})
     |> send_get()
   end
@@ -253,6 +255,11 @@ defmodule ElexusHub do
     })
   end
 
+  @doc """
+  Returns current and recent price information for the selected `item_id`, pricing is drawn from the given `realm` and `faction`.
+
+  ## Examples
+  """
   def item_details(
         server,
         faction \\ "alliance",
@@ -275,7 +282,7 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns information about a given item id.
+  Returns information about a given `item_id`.
 
   ## Examples
 
@@ -306,7 +313,7 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns a map of all servers in a list.
+  Returns a list containing information about all of the World of Wacraft realms.
 
   ## Examples
 
@@ -337,11 +344,11 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns current World of Wacraft news from Wowhead. Accepts a requested amount of articles, defaults to 4.
+  Returns the latest `number` of World of Wacraft news articles from [Wowhead](https://www.wowhead.com/).
 
   ## Examples
 
-      iex> ElexusHub.news(count)
+      iex> ElexusHub.news(number)
       [
         %{
           categories: ["TBC"],
@@ -357,13 +364,13 @@ defmodule ElexusHub do
 
   """
 
-  def news(per_chunk \\ 4) do
+  def news(number \\ 4) do
     ~s(news)
-    |> send_get([], %{limit: per_chunk})
+    |> send_get([], %{limit: number})
   end
 
   @doc """
-  Fuzzy item search. Note the misspelled item name in the example.
+  Fuzzy item search by `query`. Note the misspelled item name in the example.
 
   ## Examples
 
@@ -384,7 +391,7 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Fuzzy item search for only the beginning of the string. Use for autocomplete, etc
+  Fuzzy item suggestions by `query` using `String.starts_with?/2`. Use for autocomplete, etc
 
   ## Examples
 
