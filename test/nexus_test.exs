@@ -1,4 +1,4 @@
-defmodule ElexusHubTest do
+defmodule ElexusTest do
   use ExUnit.Case
-  doctest ElexusHub
+  doctest Elexus
 end

@@ -1,13 +1,13 @@
-defmodule ElexusHub do
+defmodule Elexus do
   @moduledoc """
-  An unofficial wrapper for the Wacraft portion of the [Nexus Hub API](https://elexushubhub.co/wow-classic)
+  An unofficial wrapper for the Wacraft portion of the [Nexus Hub API](https://Elexushub.co/wow-classic)
   """
   @doc """
   Returns the current phase details.
 
   ## Examples
 
-      iex> ElexusHub.phase()
+      iex> Elexus.phase()
       %{
         contentPhase: 1,
         description: "Karazhan, Gruul's and Magtheridon's Lair",
@@ -23,21 +23,21 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns the given phase details as a map, the phase must be an integer from `1` to `5`.
+  Returns the selected `phase` details.
 
   ## Examples
 
-      iex> ElexusHub.phase(3)
+      iex> Elexus.phase(3)
       %{
         contentPhase: 1,
         description: "Battle for Mount Hyjal and Black Temple",
         releaseDate: nil
       }
 
-      iex> ElexusHub.phase(6)
+      iex> Elexus.phase(6)
       nil
 
-      iex> ElexusHub.phase("hello")
+      iex> Elexus.phase("hello")
       nil
 
   """
@@ -54,7 +54,7 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex> ElexusHub.phases()
+      iex> Elexus.phases()
       [
         %{
           contentPhase: 1,
@@ -80,10 +80,10 @@ defmodule ElexusHub do
       ]
 
 
-      iex> ElexusHub.phase(6)
+      iex> Elexus.phase(6)
       nil
 
-      iex> ElexusHub.phase("hello")
+      iex> Elexus.phase("hello")
       nil
 
   """
@@ -98,7 +98,7 @@ defmodule ElexusHub do
 
   ##Examples
 
-      iex> ElexusHub.professions()
+      iex> Elexus.professions()
       [
         %{
           icon: "https://render-classic-us.worldofwarcraft.com/icons/56/trade_alchemy.jpg",
@@ -134,7 +134,7 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex> ElexusHub.item_craft_deals("netherwind", "alliance", 1)
+      iex> Elexus.craftable_deals("netherwind", "alliance", 1)
       [
         %{
           amount: [5, 5],
@@ -159,8 +159,8 @@ defmodule ElexusHub do
 
   """
 
-  @spec item_craft_deals(String.t(), String.t(), integer(), integer(), integer()) :: map()
-  def item_craft_deals(server, faction \\ "alliance", limit \\ 4, skip \\ 0, min_quantity \\ 3) do
+  @spec craftable_deals(String.t(), String.t(), integer(), integer(), integer()) :: map()
+  def craftable_deals(server, faction \\ "alliance", limit \\ 4, skip \\ 0, min_quantity \\ 3) do
     ~s(crafting/#{server}-#{faction}/deals)
     |> send_get([], %{limit: limit, skip: skip, min_quantity: min_quantity})
   end
@@ -170,7 +170,7 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex> ElexusHub.item_crafts("netherwind", "alliance", 24261)
+      iex> Elexus.item_crafts("netherwind", "alliance", 24261)
       %{
         itemId: 24261,
         name: "Whitemend Pants",
@@ -256,11 +256,57 @@ defmodule ElexusHub do
   end
 
   @doc """
-  Returns current and recent price information for the selected `item_id`, pricing is drawn from the given `realm` and `faction`.
+  Returns current and recent price information for the selected `item_id` in relation to the `realm` and `faction`.
 
   ## Examples
+
+      iex> Elexus.item_pricing("netherwind", "alliance", 22844)
+      %{
+        icon: "https://wow.zamimg.com/images/wow/icons/large/inv_potion_127.jpg",
+        itemId: 22844,
+        itemLevel: 72,
+        itemLink: "|cffffffff|Hitem:22844::::::::::0|h[Major Nature Protection Potion]|h|r",
+        name: "Major Nature Protection Potion",
+        requiredLevel: 60,
+        sellPrice: 6000,
+        server: "netherwind-alliance",
+        stats: %{
+          current: %{
+            historicalValue: 69900,
+            marketValue: 1250807,
+            minBuyout: 1778000,
+            numAuctions: 1,
+            quantity: 5
+          },
+          lastUpdated: "2021-08-13T03:06:14.000Z",
+          previous: %{
+            historicalValue: 64950,
+            marketValue: 1085116,
+            minBuyout: 1776000,
+            numAuctions: 2,
+            quantity: 10
+          }
+        },
+        tags: ["Common", "Consumable"],
+        tooltip: [
+          %{format: "Common", label: "Major Nature Protection Potion"},
+          %{format: "Misc", label: "Item Level 72"},
+          %{label: "Requires Level 60"},
+          %{
+            format: "Uncommon",
+            label: "Use: Absorbs 2800 to 4000 nature damage.  Lasts 2 min. (2 Min Cooldown)"
+          },
+          %{label: "Max Stack: 5"},
+          %{label: "Sell Price:"}
+        ],
+        uniqueName: "major-nature-protection-potion-22844",
+        vendorPrice: nil
+      }
+
+
   """
-  def item_details(
+  @spec item_pricing(String.t(), String.t(), integer()) :: map()
+  def item_pricing(
         server,
         faction \\ "alliance",
         item_id
@@ -286,7 +332,7 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex>ElexusHub.item(22265)
+      iex>Elexus.item(22265)
       %{
         icon: "https://wow.zamimg.com/images/wow/icons/large/inv_valentinescard02.jpg",
         itemId: 22265,
@@ -317,7 +363,7 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex> ElexusHub.servers()
+      iex> Elexus.servers()
       [
         %{name: "Heartseeker", region: "US", slug: "heartseeker"},
         %{name: "Heartstriker", region: "EU", slug: "heartstriker"},
@@ -348,7 +394,7 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex> ElexusHub.news(number)
+      iex> Elexus.news(number)
       [
         %{
           categories: ["TBC"],
@@ -374,13 +420,13 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex>ElexusHub.search("Ironfow", 1, 0.8)
+      iex>Elexus.search("Ironfow", 1, 0.8)
       [
         %{
-          :itemId => 11684,
-          :name => "Ironfoe",
-          :uniqueName => "ironfoe",
-          "imgUrl" => "https://wow.zamimg.com/images/wow/icons/large/spell_frost_frostbrand.jpg"
+          itemId: 11684,
+          name: "Ironfoe",
+          uniqueName: "ironfoe",
+          imgUrl: "https://wow.zamimg.com/images/wow/icons/large/spell_frost_frostbrand.jpg"
         }
       ]
 
@@ -395,28 +441,28 @@ defmodule ElexusHub do
 
   ## Examples
 
-      iex> ElexusHub.suggestions("devi", 3)
+      iex> Elexus.suggestions("devi", 3)
       [
         %{
-          :itemId => 6522,
-          :name => "Deviate Fish",
-          :uniqueName => "deviate-fish",
-          "imgUrl" => "https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterhead_01.jpg",
-          "type" => "Consumable"
+          itemId: 6522,
+          name: "Deviate Fish",
+          uniqueName: "deviate-fish",
+          imgUrl: "https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterhead_01.jpg",
+          type: "Consumable"
         },
         %{
-          :itemId => 6443,
-          :name => "Deviate Hide",
-          :uniqueName => "deviate-hide",
-          "imgUrl" => "https://wow.zamimg.com/images/wow/icons/large/inv_misc_pelt_wolf_ruin_03.jpg",
-          "type" => "Quest"
+          itemId: 6443,
+          name: "Deviate Hide",
+          uniqueName: "deviate-hide",
+          imgUrl: "https://wow.zamimg.com/images/wow/icons/large/inv_misc_pelt_wolf_ruin_03.jpg",
+          type: "Quest"
         },
         %{
-          :itemId => 6470,
-          :name => "Deviate Scale",
-          :uniqueName => "deviate-scale",
-          "imgUrl" => "https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterscales_02.jpg",
-          "type" => "Trade Goods"
+          itemId: 6470,
+          name: "Deviate Scale",
+          uniqueName: "deviate-scale",
+          imgUrl: "https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterscales_02.jpg",
+          type: "Trade Goods"
         }
       ]
 
@@ -436,7 +482,7 @@ defmodule ElexusHub do
   defp send_get(endpoint, options \\ [], params \\ %{})
 
   defp send_get(endpoint, options, params) do
-    Fish.ElexusHub.Base.get(endpoint, options, params: params)
+    Fish.Elexus.Base.get(endpoint, options, params: params)
     |> return_get()
   end
 
