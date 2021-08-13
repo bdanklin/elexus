@@ -13,7 +13,7 @@ The package can be installed by adding `elexus` to your list of dependencies in 
 ```elixir
 def deps do
   [
-    {:elexus, "~> 0.1.0"}
+    {:elexus, "~> 0.1.1"}
   ]
 end
 ```
