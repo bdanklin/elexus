@@ -117,9 +117,9 @@ defmodule Elexus do
 
   Returns craftables currently identified as being profitable to craft. accepts the following options:
 
-  - `limit:` Maximum items to return.
-  - `skip:` Items to skip before returning.
-  - `min_quantity:` Only return if `Enum.count/1` is greater than `:min_quantity`
+  - `:limit` Maximum items to return
+  - `:skip` Items to skip before results
+  - `:min_quantity` Filters out items with low quantity
 
   ## Examples
 
@@ -291,6 +291,15 @@ defmodule Elexus do
     |> send_get()
   end
 
+  @doc """
+  Returns Auction House items identified as being profitable to buy.
+
+  accepts the following options:
+  - `:limit` Maximum items to return
+  - `:skip` Items to skip before results
+  - `:min_quantity` Filters out items with low quantity
+  - `:relative` Sorts by relative difference instead of absolute
+  """
   @typedoc """
   Acceptable options for `Elexus.item_deals/3`
   """
@@ -299,10 +308,11 @@ defmodule Elexus do
           | {:skip, integer()}
           | {:min_quantity, integer()}
           | {:relative, boolean()}
-          | {:compare_with, String.t()}
 
   @spec item_deals(String.t(), String.t(), [item_deals_opt]) :: list()
-  def item_deals(server, faction \\ "alliance", opts \\ []) do
+  def item_deals(server, faction, opts)
+
+  def item_deals(server \\ "netherwind", faction \\ "alliance", opts \\ []) do
     ~s(items/#{server}-#{faction}/deals)
     |> send_get([], opts)
   end
@@ -358,6 +368,8 @@ defmodule Elexus do
 
   """
   @spec item(integer(), String.t(), String.t()) :: map()
+  def item(item_id, server, faction)
+
   def item(item_id, server, faction \\ "alliance") do
     ~s(items/#{server}-#{faction}/#{item_id})
     |> send_get()
