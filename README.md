@@ -1,8 +1,6 @@
-# Nexus
+# elexus
 
-A Lightweight wrapper for the Nexus Hub Api
-
-todo: add link
+A Lightweight wrapper for the Nexus Hub API, written in Elixir.
 
 ## Installation
 
