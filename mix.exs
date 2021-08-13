@@ -1,21 +1,21 @@
-defmodule Nexus.MixProject do
+defmodule ElexusHub.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :nexus,
+      app: :elexus_hub,
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       # Docs
-      name: "Nexus",
-      source_url: "https://github.com/bdanklin/Nexus",
-      homepage_url: "https://github.com/bdanklin/Nexus",
+      name: "Elexus Hub",
+      source_url: "https://github.com/bdanklin/elexus_hub",
+      homepage_url: "https://github.com/bdanklin/elexus_hub",
       docs: [
         # The main page in the docs
-        main: "Nexus",
-        logo: "/home/benjamin/nexus/logo.png",
+        main: "ElexusHub",
+        logo: "./logo.png",
         extras: ["README.md"]
       ],
       description: description(),
@@ -41,7 +41,7 @@ defmodule Nexus.MixProject do
   end
 
   defp description() do
-    "A lightweight wrapper for the Nexus Hub API written in Elixir."
+    "A lightweight wrapper for the ElexusHub Hub API written in Elixir."
   end
 
   defp package() do
@@ -49,7 +49,7 @@ defmodule Nexus.MixProject do
       # These are the default files included in the package
       files: ~w(lib .formatter.exs mix.exs),
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/bdanklin/Nexus"}
+      links: %{"GitHub" => "https://github.com/bdanklin/ElexusHub"}
     ]
   end
 end

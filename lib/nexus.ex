@@ -1,13 +1,13 @@
-defmodule Nexus do
+defmodule ElexusHub do
   @moduledoc """
-  An unofficial wrapper for the Wacraft portion of the [NexusHub API](https://nexushub.co/wow-classic)
+  An unofficial wrapper for the Wacraft portion of the [ElexusHubHub API](https://elexushubhub.co/wow-classic)
   """
   @doc """
   Returns the current phase details.
 
   ## Examples
 
-      iex> Nexus.phase()
+      iex> ElexusHub.phase()
       %{
         contentPhase: 1,
         description: "Karazhan, Gruul's and Magtheridon's Lair",
@@ -27,17 +27,17 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.phase(3)
+      iex> ElexusHub.phase(3)
       %{
         contentPhase: 1,
         description: "Battle for Mount Hyjal and Black Temple",
         releaseDate: nil
       }
 
-      iex> Nexus.phase(6)
+      iex> ElexusHub.phase(6)
       nil
 
-      iex> Nexus.phase("hello")
+      iex> ElexusHub.phase("hello")
       nil
 
   """
@@ -54,7 +54,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.phases()
+      iex> ElexusHub.phases()
       [
         %{
           contentPhase: 1,
@@ -80,10 +80,10 @@ defmodule Nexus do
       ]
 
 
-      iex> Nexus.phase(6)
+      iex> ElexusHub.phase(6)
       nil
 
-      iex> Nexus.phase("hello")
+      iex> ElexusHub.phase("hello")
       nil
 
   """
@@ -98,7 +98,7 @@ defmodule Nexus do
 
   ##Examples
 
-      iex> Nexus.professions()
+      iex> ElexusHub.professions()
       [
         %{
           icon: "https://render-classic-us.worldofwarcraft.com/icons/56/trade_alchemy.jpg",
@@ -132,7 +132,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.item_craft_deals("netherwind", "alliance", 1)
+      iex> ElexusHub.item_craft_deals("netherwind", "alliance", 1)
       [
         %{
           amount: [5, 5],
@@ -168,7 +168,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.item_crafts("netherwind", "alliance", 24261)
+      iex> ElexusHub.item_crafts("netherwind", "alliance", 24261)
       %{
         itemId: 24261,
         name: "Whitemend Pants",
@@ -279,7 +279,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex>Nexus.item(22265)
+      iex>ElexusHub.item(22265)
       %{
         icon: "https://wow.zamimg.com/images/wow/icons/large/inv_valentinescard02.jpg",
         itemId: 22265,
@@ -310,7 +310,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.servers()
+      iex> ElexusHub.servers()
       [
         %{name: "Heartseeker", region: "US", slug: "heartseeker"},
         %{name: "Heartstriker", region: "EU", slug: "heartstriker"},
@@ -341,7 +341,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.news(count)
+      iex> ElexusHub.news(count)
       [
         %{
           categories: ["TBC"],
@@ -367,7 +367,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex>Nexus.search("Ironfow", 1, 0.8)
+      iex>ElexusHub.search("Ironfow", 1, 0.8)
       [
         %{
           :itemId => 11684,
@@ -388,7 +388,7 @@ defmodule Nexus do
 
   ## Examples
 
-      iex> Nexus.suggestions("devi", 3)
+      iex> ElexusHub.suggestions("devi", 3)
       [
         %{
           :itemId => 6522,
@@ -429,7 +429,7 @@ defmodule Nexus do
   defp send_get(endpoint, options \\ [], params \\ %{})
 
   defp send_get(endpoint, options, params) do
-    Fish.Nexus.Base.get(endpoint, options, params: params)
+    Fish.ElexusHub.Base.get(endpoint, options, params: params)
     |> return_get()
   end
 

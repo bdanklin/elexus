@@ -1,9 +1,9 @@
-defmodule Fish.Nexus.Base do
+defmodule Fish.ElexusHub.Base do
   use HTTPoison.Base
   @moduledoc false
 
   @expected_fields ~w(categories content guid isoDate link pubDate title region slug reagentFor createdBy error reason recipes requiredSkill amount category createdByCosts itemProfit profit reagents contentPhase description releaseDate scannedAt icon itemId itemLevel itemLink name requiredLevel sellPrice server stats current historicalValue marketValue minBuyout numAuctions quantity lastUpdated previous historicalValue marketValue minBuyout numAuctions quantity tags tooltip uniqueName vendorPrice format label)
-  @endpoint "https://api.nexushub.co/wow-classic/v1/"
+  @endpoint "https://api.elexushubhub.co/wow-classic/v1/"
 
   def process_request_url(url) do
     @endpoint <> url
